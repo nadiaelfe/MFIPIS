@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>report.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<hr>
+<h1 id="front-matter">Front matter</h1>
+<p>title: &quot;Отчёт по лабораторной работе №4&quot;
+subtitle: &quot;Алгоритм Евклида&quot;
+author: &quot;Надиа Эззакат&quot;</p>
+<h1 id="generic-otions">Generic otions</h1>
+<p>lang: ru-RU
+toc-title: &quot;Содержание&quot;</p>
+<h1 id="bibliography">Bibliography</h1>
+<p>bibliography: bib/cite.bib
+csl: pandoc/csl/gost-r-7-0-5-2008-numeric.csl</p>
+<h1 id="pdf-output-format">Pdf output format</h1>
+<p>toc: true # Table of contents
+toc_depth: 2
+lof: true # List of figures
+fontsize: 12pt
+linestretch: 1.5
+papersize: a4
+documentclass: scrreprt</p>
+<h2 id="i18n">I18n</h2>
+<p>polyglossia-lang:
+name: russian
+options:
+- spelling=modern
+- babelshorthands=true
+polyglossia-otherlangs:
+name: english</p>
+<h3 id="fonts">Fonts</h3>
+<p>mainfont: PT Serif
+romanfont: PT Serif
+sansfont: PT Sans
+monofont: PT Mono
+mainfontoptions: Ligatures=TeX
+romanfontoptions: Ligatures=TeX
+sansfontoptions: Ligatures=TeX,Scale=MatchLowercase
+monofontoptions: Scale=MatchLowercase,Scale=0.9</p>
+<h2 id="biblatex">Biblatex</h2>
+<p>biblatex: true
+biblio-style: &quot;gost-numeric&quot;
+biblatexoptions:</p>
+<ul>
+<li>parentracker=true</li>
+<li>backend=biber</li>
+<li>hyperref=auto</li>
+<li>language=auto</li>
+<li>autolang=other*</li>
+<li>citestyle=gost-numeric</li>
+</ul>
+<h2 id="misc-options">Misc options</h2>
+<p>indent: true
+header-includes:</p>
+<ul>
+<li>\linepenalty=10 # the penalty added to the badness of each line within a paragraph (no associated penalty node) Increasing the value makes tex try to have fewer lines in the paragraph.</li>
+<li>\interlinepenalty=0 # value of the penalty (node) added after each line of a paragraph.</li>
+<li>\hyphenpenalty=50 # the penalty for line breaking at an automatically inserted hyphen</li>
+<li>\exhyphenpenalty=50 # the penalty for line breaking at an explicit hyphen</li>
+<li>\binoppenalty=700 # the penalty for breaking a line at a binary operator</li>
+<li>\relpenalty=500 # the penalty for breaking a line at a relation</li>
+<li>\clubpenalty=150 # extra penalty for breaking after first line of a paragraph</li>
+<li>\widowpenalty=150 # extra penalty for breaking before last line of a paragraph</li>
+<li>\displaywidowpenalty=50 # extra penalty for breaking before last line before a display math</li>
+<li>\brokenpenalty=100 # extra penalty for page breaking after a hyphenated line</li>
+<li>\predisplaypenalty=10000 # penalty for breaking before a display</li>
+<li>\postdisplaypenalty=0 # penalty for breaking after a display</li>
+<li>\floatingpenalty = 20000 # penalty for splitting an insertion (can only be split footnote in standard LaTeX)</li>
+<li>\raggedbottom # or \flushbottom</li>
+<li>\usepackage{float} # keep figures where there are in the text</li>
+<li>\floatplacement{figure}{H} # keep figures where there are in the text</li>
+</ul>
+<hr>
+<h1 id="%D1%86%D0%B5%D0%BB%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B">Цель работы</h1>
+<p>Изучение алгоритма Евклида нахождения Наибольший общий делитель и его вариаций.</p>
+<h1 id="%D1%82%D0%B5%D0%BE%D1%80%D0%B5%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D1%81%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D1%8F">Теоретические сведения</h1>
+<h2 id="%D0%BD%D0%B0%D0%B8%D0%B1%D0%BE%D0%BB%D1%8C%D1%88%D0%B8%D0%B9-%D0%BE%D0%B1%D1%89%D0%B8%D0%B9-%D0%B4%D0%B5%D0%BB%D0%B8%D1%82%D0%B5%D0%BB%D1%8C">Наибольший общий делитель</h2>
+<p>Наибольший общий делитель (НОД) – это наибольшее целое число, на которое два или более целых числа можно поделить без остатка. Например, НОД чисел 12 и 18 равен 6, потому что 6 является наибольшим числом, которое делит оба этих числа на целое.</p>
+<h2 id="%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC-%D0%B5%D0%B2%D0%BA%D0%BB%D0%B8%D0%B4%D0%B0">Алгоритм Евклида</h2>
+<p>Алгоритм Евклида позволяет с легкостью вычислить наибольший общий делитель для двух положительных чисел. Формулировки и доказательство алгоритма Евклида мы привели в разделе « Наибольший общий делитель: определитель, примеры ».</p>
+<p>Суть алгоритма заключается в том, чтобы последовательно проводить деление с остатком, в ходе которого получается ряд равенств вида:</p>
+<p>Алгоритм Евклида</p>
+<p>Вход. Целые числа $a, b ; 0 &lt; b &lt; a$.
+Выход. $d =$ НОД$(a,b)$.</p>
+<ul>
+<li>шаг 1. Положить $r_0 = a$, $r_1 = b$, $i = 1$.</li>
+<li>шаг 2. Найти остаток $r_i+1$ от деления $r_i–1$ на $r_i$.</li>
+<li>шаг 3. Если $r_i+1 = 0$, то положить $d = r_i$. В противном случае положить $i = i+1$ и вернуться на шаг 2.</li>
+<li>шаг 4. Результат: $d$.</li>
+</ul>
+<p>Пример: Найти НОД для 64 и 48.</p>
+<p>Конец: НОД (64,48) – это делитель 16.</p>
+<h2 id="%D0%B1%D0%B8%D0%BD%D0%B0%D1%80%D0%BD%D1%8B%D0%B9-%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC-%D0%B5%D0%B2%D0%BA%D0%BB%D0%B8%D0%B4%D0%B0">Бинарный алгоритм Евклида</h2>
+<p>Бинарный алгоритм Евклида вычисления НОД оказывается более быстрым при реализации этого алгоритма на компьютере, поскольку использует двоичное представление чисел а и b.
+Бинарный алгоритм Евклида основан на следующих свойствах наибольшего общего делителя (считаем, что 0 &lt; b ≤ а):</p>
+<ul>
+<li>Вход. Целые числа $a, b; 0 &lt; b ≤ a$.</li>
+<li>Выход. $d =$ HOД$(a,b)$.</li>
+</ul>
+<ol>
+<li>Положить $g = 1$.</li>
+<li>Пока оба числа $a$ и $b$ четные, выполнять $a = a/2, b = b/2, g = 2g$ до получения хотя бы одного нечетного значения $a$ или $b$.</li>
+<li>Положить $u = a, v = b$.</li>
+<li>Пока $u \neq 0$, выполнять следующие действия.
+<ul>
+<li>Пока $u$ четное, полагать $u = u/2$.</li>
+<li>Пока $v$ четное, полагать $v = v/2$.</li>
+<li>При $u \geq v$ положить $u = u - v$. В противном случае положить $v = v – u$.</li>
+</ul>
+</li>
+<li>Положить $d = gv$.</li>
+<li>Результат: $d$</li>
+</ol>
+<h2 id="%D1%80%D0%B0%D1%81%D1%88%D0%B8%D1%80%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9-%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC-%D0%B5%D0%B2%D0%BA%D0%BB%D0%B8%D0%B4%D0%B0">Расширенный алгоритм Евклида</h2>
+<p>Расширенный алгоритм Евклида находит наибольший общий делитель d чисел а и b и его линейное представление, т. е. целые числа x и у, для которых ах + by = d, и не требует «возврата», как в рассмотренном примере.
+Пусть d – НОД для a и b, т. е. d = (a, b), где a &gt; b.
+Тогда существуют такие целые числа x и y, что d = ax +by.
+Иными словам, НОД двух чисел можно представить в виде линейной комбинации этих чисел с целыми коэффициентами</p>
+<ul>
+<li>Вход. Целые числа $a, b; 0 &lt; b ≤ a$.</li>
+<li>Выход: $d =$ НОД$(a, b)$; такие целые числа $x, y$, что $ax + by = d$.</li>
+</ul>
+<ol>
+<li>Положить $r_0 = a, r_1 = b, x_0 = 1, x_1 = 0, y_0 = 0, y_1 = 1, i = 1$</li>
+<li>Разделить с остатком $r_i–1$ на $r_i$ : $r_(i–1) = q_i*r_i + r_i + 1$</li>
+<li>Если $r_(i+1) = 0$, то положить $d = r_i$, $x = x_i$, $y = y_i$. В противном случае положить $x_(i+1) = (x_(i–1) – q_i<em>x_i$, $y_(i+1) = y_(i–1) – q_i</em>y_i$, $i = i + 1$ и вернуться на шаг 2.</li>
+<li>Результат: $d, x, y$.</li>
+</ol>
+<h1 id="%D0%B2%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B">Выполнение работы</h1>
+<h2 id="%D1%80%D0%B5%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D0%BE%D0%B2">Реализация алгоритмов</h2>
+<pre class="hljs"><code><div>def gcd(a, b):
+    # Инициализация r_0 и r_1
+    r_0 = a
+    r_1 = b
+    i = 1  # Счётчик итераций
+    
+    print(f&quot;Начальные значения: r_0 = {r_0}, r_1 = {r_1}&quot;)
+    
+    while True:
+        # Найти остаток r_(i+1)
+        r_next = r_0 % r_1
+        print(f&quot;Итерация {i}: r_0 = {r_0}, r_1 = {r_1}, остаток r_next = {r_next}&quot;)
+        
+        if r_next == 0:
+            print(f&quot;Остаток равен 0. НОД найден: {r_1}&quot;)
+            return r_1
+        else:
+            # Обновить значения для следующей итерации
+            r_0 = r_1
+            r_1 = r_next
+            i += 1
+
+# Ввод значений
+a = int(input(&quot;Введите значение a: &quot;))
+b = int(input(&quot;Введите значение b: &quot;))
+
+# Вызов функции gcd и вывод результата
+d = gcd(a, b)
+print(f&quot;НОД чисел {a} и {b} = {d}&quot;)
+
+def binary_gcd(a, b):
+    g = 1
+    
+    # Делим оба числа на 2, пока хотя бы одно из них не станет нечётным
+    while a % 2 == 0 and b % 2 == 0:
+        a //= 2
+        b //= 2
+        g *= 2
+        print(f&quot;Делим оба числа на 2: a = {a}, b = {b}, g = {g}&quot;)
+    
+    u, v = a, b
+    while u != 0:
+        # Делим u на 2, пока оно не станет нечётным
+        while u % 2 == 0:
+            u //= 2
+            print(f&quot;Делим u на 2: u = {u}&quot;)
+        
+        # Делим v на 2, пока оно не станет нечётным
+        while v % 2 == 0:
+            v //= 2
+            print(f&quot;Делим v на 2: v = {v}&quot;)
+        
+        # Вычитаем меньшее из большего
+        if u &gt;= v:
+            u -= v
+            print(f&quot;Вычитаем v из u: u = {u}&quot;)
+        else:
+            v -= u
+            print(f&quot;Вычитаем u из v: v = {v}&quot;)
+    
+    # Восстанавливаем НОД с учётом множителя g
+    d = g * v
+    print(f&quot;НОД найден: НОД = {d}&quot;)
+    return d
+
+# Ввод значений
+a = int(input(&quot;Введите значение a: &quot;))
+b = int(input(&quot;Введите значение b: &quot;))
+
+# Вызов функции binary_gcd и вывод результата
+d = binary_gcd(a, b)
+print(f&quot;НОД чисел {a} и {b} = {d}&quot;)
+
+def extended_euclidean(a, b):
+    r0, r1 = a, b
+    x0, x1 = 1, 0
+    y0, y1 = 0, 1
+    i = 1  # Счетчик итераций
+    
+    while True:
+        # Делим r_(i-1) на r_i, чтобы получить частное q и остаток r_(i+1)
+        q = r0 // r1
+        r_next = r0 - q * r1  # Остаток r_(i+1)
+        print(f&quot;Итерация {i}: q = {q}, r_next = {r_next}, r0 = {r0}, r1 = {r1}&quot;)
+
+        # Проверка на окончание: если остаток равен 0, НОД найден
+        if r_next == 0:
+            d, x, y = r1, x1, y1
+            print(f&quot;НОД найден: d = {d}, x = {x}, y = {y}&quot;)
+            return d, x, y
+
+        # Обновляем x и y для следующей итерации
+        x_next = x0 - q * x1
+        y_next = y0 - q * y1
+        print(f&quot;x_next = {x_next}, y_next = {y_next}&quot;)
+
+        # Подготовка к следующей итерации
+        r0, r1 = r1, r_next
+        x0, x1 = x1, x_next
+        y0, y1 = y1, y_next
+        i += 1
+
+# Ввод значений
+a = int(input(&quot;Введите значение a: &quot;))
+b = int(input(&quot;Введите значение b: &quot;))
+
+# Вызов функции extended_euclidean и вывод результата
+d, x, y = extended_euclidean(a, b)
+print(f&quot;НОД чисел {a} и {b} = {d}, коэффициенты: x = {x}, y = {y}&quot;)
+
+def binary_extended(a, b):
+    g = 1
+    
+    # Делим оба числа на 2, пока оба четные
+    while a % 2 == 0 and b % 2 == 0:
+        a //= 2
+        b //= 2
+        g *= 2
+        print(f&quot;Делим оба числа на 2: a = {a}, b = {b}, g = {g}&quot;)
+    
+    u, v = a, b
+    A, B, C, D = 1, 0, 0, 1
+    
+    # Основной цикл
+    while u != 0:
+        # Делим u на 2, пока оно не станет нечётным
+        while u % 2 == 0:
+            u //= 2
+            if A % 2 == 0 and B % 2 == 0:
+                A //= 2
+                B //= 2
+            else:
+                A = (A + b) // 2
+                B = (B - a) // 2
+            print(f&quot;Делим u и коэффициенты: u = {u}, A = {A}, B = {B}&quot;)
+
+        # Делим v на 2, пока оно не станет нечётным
+        while v % 2 == 0:
+            v //= 2
+            if C % 2 == 0 and D % 2 == 0:
+                C //= 2
+                D //= 2
+            else:
+                C = (C + b) // 2
+                D = (D - a) // 2
+            print(f&quot;Делим v и коэффициенты: v = {v}, C = {C}, D = {D}&quot;)
+
+        # Вычитаем меньшее из большего и обновляем коэффициенты
+        if u &gt;= v:
+            u -= v
+            A -= C
+            B -= D
+            print(f&quot;u &gt;= v: u = {u}, A = {A}, B = {B}&quot;)
+        else:
+            v -= u
+            C -= A
+            D -= B
+            print(f&quot;v &gt; u: v = {v}, C = {C}, D = {D}&quot;)
+    
+    # Восстанавливаем НОД с учётом множителя g
+    d = g * v
+    x, y = C, D
+    print(f&quot;НОД найден: d = {d}, x = {x}, y = {y}&quot;)
+    return d, x, y
+
+# Ввод значений
+a = int(input(&quot;Введите значение a: &quot;))
+b = int(input(&quot;Введите значение b: &quot;))
+
+# Вызов функции binary_extended и вывод результата
+d, x, y = binary_extended(a, b)
+print(f&quot;НОД чисел {a} и {b} = {d}, коэффициенты: x = {x}, y = {y}&quot;)
+</div></code></pre>
+<h2 id="%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9-%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80">Контрольный пример</h2>
+<p><img src="0.png" alt="нахождения НОД с использованием алгоритма Евклида"></p>
+<p><img src="1.png" alt="Бинарный алгоритм Евклида для нахождения НОД"></p>
+<p><img src="2.png" alt="Расширенный алгоритм Евклида для нахождения НОД и коэффициентов x и y"></p>
+<p><img src="3.png" alt="Расширенный бинарный алгоритм Евклида для нахождения НОД и коэффициентов x и y"></p>
+<h1 id="%D0%B2%D1%8B%D0%B2%D0%BE%D0%B4%D1%8B">Выводы</h1>
+<p>Изучилa алгоритм Евклида нахождения Наибольший общий делитель.</p>
+<h1 id="%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA-%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%82%D1%83%D1%80%D1%8Bunnumbered">Список литературы{.unnumbered}</h1>
+<ol>
+<li><a href="https://zaochnik-com.com/spravochnikmatematika/delimost/nahozhdenie-nod/">Нахождение НОД по алгоритму Евклида</a></li>
+<li><a href="https://habr.com/ru/post/464949/">Наибольший общий делитель</a></li>
+</ol>
+
+</body>
+</html>
