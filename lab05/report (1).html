@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>report (1).md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<hr>
+<h1 id="front-matter">Front matter</h1>
+<p>title: &quot;Отчёт по лабораторной работе №5&quot;
+subtitle: &quot;Вероятностные алгоритмы проверки чисел на простоту&quot;
+author: &quot;Надиа Эззакат&quot;</p>
+<h1 id="generic-otions">Generic otions</h1>
+<p>lang: ru-RU
+toc-title: &quot;Содержание&quot;</p>
+<h1 id="bibliography">Bibliography</h1>
+<p>bibliography: bib/cite.bib
+csl: pandoc/csl/gost-r-7-0-5-2008-numeric.csl</p>
+<h1 id="pdf-output-format">Pdf output format</h1>
+<p>toc: true # Table of contents
+toc_depth: 2
+lof: true # List of figures
+fontsize: 12pt
+linestretch: 1.5
+papersize: a4
+documentclass: scrreprt</p>
+<h2 id="i18n">I18n</h2>
+<p>polyglossia-lang:
+name: russian
+options:
+- spelling=modern
+- babelshorthands=true
+polyglossia-otherlangs:
+name: english</p>
+<h3 id="fonts">Fonts</h3>
+<p>mainfont: PT Serif
+romanfont: PT Serif
+sansfont: PT Sans
+monofont: PT Mono
+mainfontoptions: Ligatures=TeX
+romanfontoptions: Ligatures=TeX
+sansfontoptions: Ligatures=TeX,Scale=MatchLowercase
+monofontoptions: Scale=MatchLowercase,Scale=0.9</p>
+<h2 id="biblatex">Biblatex</h2>
+<p>biblatex: true
+biblio-style: &quot;gost-numeric&quot;
+biblatexoptions:</p>
+<ul>
+<li>parentracker=true</li>
+<li>backend=biber</li>
+<li>hyperref=auto</li>
+<li>language=auto</li>
+<li>autolang=other*</li>
+<li>citestyle=gost-numeric</li>
+</ul>
+<h2 id="misc-options">Misc options</h2>
+<p>indent: true
+header-includes:</p>
+<ul>
+<li>\linepenalty=10 # the penalty added to the badness of each line within a paragraph (no associated penalty node) Increasing the value makes tex try to have fewer lines in the paragraph.</li>
+<li>\interlinepenalty=0 # value of the penalty (node) added after each line of a paragraph.</li>
+<li>\hyphenpenalty=50 # the penalty for line breaking at an automatically inserted hyphen</li>
+<li>\exhyphenpenalty=50 # the penalty for line breaking at an explicit hyphen</li>
+<li>\binoppenalty=700 # the penalty for breaking a line at a binary operator</li>
+<li>\relpenalty=500 # the penalty for breaking a line at a relation</li>
+<li>\clubpenalty=150 # extra penalty for breaking after first line of a paragraph</li>
+<li>\widowpenalty=150 # extra penalty for breaking before last line of a paragraph</li>
+<li>\displaywidowpenalty=50 # extra penalty for breaking before last line before a display math</li>
+<li>\brokenpenalty=100 # extra penalty for page breaking after a hyphenated line</li>
+<li>\predisplaypenalty=10000 # penalty for breaking before a display</li>
+<li>\postdisplaypenalty=0 # penalty for breaking after a display</li>
+<li>\floatingpenalty = 20000 # penalty for splitting an insertion (can only be split footnote in standard LaTeX)</li>
+<li>\raggedbottom # or \flushbottom</li>
+<li>\usepackage{float} # keep figures where there are in the text</li>
+<li>\floatplacement{figure}{H} # keep figures where there are in the text</li>
+</ul>
+<hr>
+<h1 id="%D1%86%D0%B5%D0%BB%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B">Цель работы</h1>
+<p>Изучение Вероятностные алгоритмы проверки чисел на простоту : алгоритмов Ферма, вычисления символа якоби, Соловэя-Штрассена, Миллера-Рабина.</p>
+<h1 id="%D1%82%D0%B5%D0%BE%D1%80%D0%B5%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D1%81%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D1%8F">Теоретические сведения</h1>
+<p>Действительно, стойкость алгоритма RSA основана на возможности выбора простых чисел, состоящих из не менее 100 десятичных знаков. Поиск таких чисел последовательным перебором всех нечетных, начиная с некоторого стартового, и последующим «просеиванием» через решето Эратосфена весьма затруднителен. Проблему решают обходным маневром и решают «приближенно», а точнее — «вероятностно». Возможного кандидата на простое число подвергают испытанию серией однотипных и легко осуществимых тестов. Положительность результата хотя бы одного теста однозначно свидетельствует о том, что кандидат является числом составным; с другой стороны, отрицательный результат теста не дает абсолютной гарантии простоты кандидата, но свидетельствует о том, что вероятность его быть составным уменьшилась на определенную величину, скажем, в два раза. Тогда с увеличением количества отрицательных результатов все меньше шансов у испытуемого числа оказаться составным. Организовав серию испытаний из большого количества — например, 100 — тестов и получив все их результаты отрицательными, мы имеем право сказать, что кандидат является скорее всего («вроде бы») простым, с вероятностью не менее. Для таких чисел используют название вероятностно простые числа. Мы изложим здесь два способа организации упомянутой серии тестов, при этом тестируемое число будем обозначать.</p>
+<h2 id="%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC-%D1%80%D0%B5%D0%B0%D0%BB%D0%B8%D0%B7%D1%83%D1%8E%D1%89%D0%B8%D0%B9-%D1%82%D0%B5%D1%81%D1%82-%D1%84%D0%B5%D1%80%D0%BC%D0%B0">Алгоритм, реализующий тест Ферма</h2>
+<ul>
+<li>Вход. Нечетное целое число $n \geq 5$.</li>
+<li>Выход. «Число n, вероятно, простое» или «Число n составное».</li>
+</ul>
+<ol>
+<li>Выбрать случайное целое число $a, 2 \leq a \leq n-2$.</li>
+<li>Вычислить $r=a^{n-1} (mod n)$</li>
+<li>При $r=1$ результат: «Число n, вероятно, простое». В противном случае результат: «Число n составное».</li>
+</ol>
+<h2 id="%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC-%D0%B2%D1%8B%D1%87%D0%B8%D1%81%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F-%D1%81%D0%B8%D0%BC%D0%B2%D0%BE%D0%BB%D0%B0-%D1%8F%D0%BA%D0%BE%D0%B1%D0%B8">Алгоритм вычисления символа якоби</h2>
+<ol>
+<li>Если НОД (a, b)≠1, выход из алгоритма с ответом 0.</li>
+<li>Инициализация. r=1</li>
+<li>Переход к положительным числам. Если a&lt;0, то a=-a. Если b mod 4 = 3, то r=-r</li>
+<li>Избавление от чётности. t=0. Цикл ПОКА a — чётное, t=t+1, a=a/2. Конец цикла. Если t — нечётное, то Если b mod 8 = 3 или 5, то r=-r.</li>
+<li>Вычисление символа Якоби. 14 При перестановке аргументов больший заменяется на остаток от деления на меньший. Это возможно благодаря периодичности символа Якоби.
+Сложность алгоритма равна O(log a ⋅ log b) битовых операций.</li>
+</ol>
+<h2 id="%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC-%D1%80%D0%B5%D0%B0%D0%BB%D0%B8%D0%B7%D1%83%D1%8E%D1%89%D0%B8%D0%B9-%D1%82%D0%B5%D1%81%D1%82-%D1%81%D0%BE%D0%BB%D0%BE%D0%B2%D1%8D%D1%8F-%D1%88%D1%82%D1%80%D0%B0%D1%81%D1%81%D0%B5%D0%BD%D0%B0">Алгоритм, реализующий Тест Соловэя-Штрассена</h2>
+<ul>
+<li>Вход. Нечетное целое число $n \geq 5$.</li>
+<li>Выход. «Число n, вероятно, простое» или «Число n составное».</li>
+</ul>
+<ol>
+<li>Выбрать случайное целое число $a, 2 \leq a \leq n-2$.</li>
+<li>Вычислить $r=a^{(\frac{n-1}{2})} (mod n)$</li>
+<li>При $r \neq 1$ и $r \neq n-1$ результат: «Число n составное».</li>
+<li>Вычислить символ Якоби $s = (\frac{a}{n})$</li>
+<li>При $r=s (mod n)$ результат: «Число n, вероятно, простое». В противном случае результат: «Число n составное».</li>
+</ol>
+<h2 id="%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC-%D1%80%D0%B5%D0%B0%D0%BB%D0%B8%D0%B7%D1%83%D1%8E%D1%89%D0%B8%D0%B9-%D1%82%D0%B5%D1%81%D1%82-%D0%BC%D0%B8%D0%BB%D0%BB%D0%B5%D1%80%D0%B0-%D1%80%D0%B0%D0%B1%D0%B8%D0%BD%D0%B0">Алгоритм, реализующий Тест Миллера-Рабина.</h2>
+<ul>
+<li>Вход. Нечетное целое число $n \geq 5$.</li>
+<li>Выход. «Число n, вероятно, простое» или «Число n составное».</li>
+</ul>
+<ol>
+<li>Представить $n-1$ в виде $n-1 = 2^sr$, где r - нечетное число</li>
+<li>Выбрать случайное целое число $a, 2 \leq a \leq n-2$.</li>
+<li>Вычислить $y=a^r (mod n)$</li>
+<li>При $y \neq 1$ и $y \neq n-1$ выполнить действия
+<ul>
+<li>Положить $j=1$</li>
+<li>Если $j \leq s-1$ и $y \neq n-1$ то
+<ul>
+<li>Положить $y=y^2 (mod n)$</li>
+<li>При $y=1$   результат: «Число n составное».</li>
+<li>Положить $j=j+1$</li>
+</ul>
+</li>
+<li>При $y \neq n-1$ результат: «Число n составное».</li>
+</ul>
+</li>
+<li>Результат: «Число n, вероятно, простое».</li>
+</ol>
+<h1 id="%D0%B2%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B">Выполнение работы</h1>
+<h2 id="%D1%80%D0%B5%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D0%BE%D0%B2-%D0%BD%D0%B0-%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5-python">Реализация алгоритмов на языке Python</h2>
+<pre class="hljs"><code><div>import random
+
+- Алгоритм, реализующий тест Ферма
+
+def fermat_test(n, iterations=5):
+    for _ in range(iterations):
+        a = random.randint(2, n - 1)
+        if pow(a, n - 1, n) != 1:
+            print(&quot;составное&quot;)
+            return False
+    print(&quot;Вероятно, Простое&quot;)
+    return True
+
+- Алгоритм вычисления символа якоби 
+
+def jacobi_symbol(a, n):
+    if a == 0:
+        return 0
+    result = 1
+    if a &lt; 0:
+        a = -a
+        if n % 4 == 3:
+            result = -result
+    
+    a %= n
+    if a == 1:
+        return result
+    
+    while a:
+        if a &lt; 0:
+            a = -a
+            if n % 4 == 3:
+                result = -result
+        while a % 2 == 0:
+            a //= 2
+            if n % 8 in [3, 5]:
+                result = -result
+        a, n = n, a
+        if a % 4 == 3 and n % 4 == 3:
+            result = -result
+        a %= n
+        if a &gt; n // 2:
+            a -= n
+    
+    return result if n == 1 else 0
+
+- Алгоритм, реализующий Тест Соловэя-Штрассена
+
+def solovay_strassen(p, iterations=5):
+    if p &lt; 2 or (p &gt; 2 and p % 2 == 0):
+        print(&quot;составное&quot;)
+        return False
+
+    for _ in range(iterations):
+        a = random.randint(1, p - 1)
+        jacobian = (p + jacobi_symbol(a, p)) % p
+        mod = pow(a, (p - 1) // 2, p)
+        
+        if jacobian == 0 or mod != jacobian:
+            print(&quot;составное&quot;)
+            return False
+
+    print(&quot;Вероятно, Простое&quot;)
+    return True
+
+- Алгоритм, реализующий Тест Миллера-Рабина 
+
+def miller_rabin(n, iterations=5):
+    if n &lt;= 1 or n == 4 or n == 6 or n == 8 or n == 9:
+        print(&quot;составное&quot;)
+        return False
+    if n in {2, 3, 5, 7}:
+        print(&quot;Prime&quot;)
+        return True
+
+    s, d = 0, n - 1
+    while d % 2 == 0:
+        d //= 2
+        s += 1
+
+    def trial_composite(a):
+        if pow(a, d, n) == 1:
+            return False
+        for i in range(s):
+            if pow(a, (2 ** i) * d, n) == n - 1:
+                return False
+        return True
+
+    for _ in range(iterations):
+        a = random.randint(2, n - 1)
+        if trial_composite(a):
+            print(&quot;составное&quot;)
+            return False
+
+    print(&quot;Вероятно, Простое&quot;)
+    return True
+</div></code></pre>
+<h2 id="%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9-%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80">Контрольный пример</h2>
+<p><img src="1.png" alt="Работа алгоритмов">{ #fig:001 }</p>
+<h1 id="%D0%B2%D1%8B%D0%B2%D0%BE%D0%B4%D1%8B">Выводы</h1>
+<p>Изучили алгоритмы Ферма, вычисления символа якоби, Соловэя-Штрассена, Миллера-Рабина.</p>
+<h1 id="%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA-%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%82%D1%83%D1%80%D1%8Bunnumbered">Список литературы{.unnumbered}</h1>
+<ol>
+<li><a href="hhttps://spravochnick.ru/informatika/algoritmizaciya/proverka_chisel_na_prostotu/"> проверка чисел на простоту</a></li>
+<li><a href="https://moluch.ru/archive/90/18929/">Исследование алгоритмов генерации простых чисел</a></li>
+<li><a href="https://vmath.ru/vf5/crypto/pprime">Вероятностно простые числа</a></li>
+</ol>
+
+</body>
+</html>
