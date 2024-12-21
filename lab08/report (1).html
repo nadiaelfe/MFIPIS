@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>report (1).md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<hr>
+<h1 id="front-matter">Front matter</h1>
+<p>title: &quot;Отчёт по лабораторной работе №8&quot;
+subtitle: &quot;Целочисленная арифметика многократной точности&quot;
+author: &quot;Nadia Ezzakate&quot;</p>
+<h1 id="generic-otions">Generic otions</h1>
+<p>lang: ru-RU
+toc-title: &quot;Содержание&quot;</p>
+<h1 id="bibliography">Bibliography</h1>
+<p>bibliography: bib/cite.bib
+csl: pandoc/csl/gost-r-7-0-5-2008-numeric.csl</p>
+<h1 id="pdf-output-format">Pdf output format</h1>
+<p>toc: true # Table of contents
+toc_depth: 2
+lof: true # List of figures
+fontsize: 12pt
+linestretch: 1.5
+papersize: a4
+documentclass: scrreprt</p>
+<h2 id="i18n">I18n</h2>
+<p>polyglossia-lang:
+name: russian
+options:
+- spelling=modern
+- babelshorthands=true
+polyglossia-otherlangs:
+name: english</p>
+<h3 id="fonts">Fonts</h3>
+<p>mainfont: PT Serif
+romanfont: PT Serif
+sansfont: PT Sans
+monofont: PT Mono
+mainfontoptions: Ligatures=TeX
+romanfontoptions: Ligatures=TeX
+sansfontoptions: Ligatures=TeX,Scale=MatchLowercase
+monofontoptions: Scale=MatchLowercase,Scale=0.9</p>
+<h2 id="biblatex">Biblatex</h2>
+<p>biblatex: true
+biblio-style: &quot;gost-numeric&quot;
+biblatexoptions:</p>
+<ul>
+<li>parentracker=true</li>
+<li>backend=biber</li>
+<li>hyperref=auto</li>
+<li>language=auto</li>
+<li>autolang=other*</li>
+<li>citestyle=gost-numeric</li>
+</ul>
+<h2 id="misc-options">Misc options</h2>
+<p>indent: true
+header-includes:</p>
+<ul>
+<li>\linepenalty=10 # the penalty added to the badness of each line within a paragraph (no associated penalty node) Increasing the value makes tex try to have fewer lines in the paragraph.</li>
+<li>\interlinepenalty=0 # value of the penalty (node) added after each line of a paragraph.</li>
+<li>\hyphenpenalty=50 # the penalty for line breaking at an automatically inserted hyphen</li>
+<li>\exhyphenpenalty=50 # the penalty for line breaking at an explicit hyphen</li>
+<li>\binoppenalty=700 # the penalty for breaking a line at a binary operator</li>
+<li>\relpenalty=500 # the penalty for breaking a line at a relation</li>
+<li>\clubpenalty=150 # extra penalty for breaking after first line of a paragraph</li>
+<li>\widowpenalty=150 # extra penalty for breaking before last line of a paragraph</li>
+<li>\displaywidowpenalty=50 # extra penalty for breaking before last line before a display math</li>
+<li>\brokenpenalty=100 # extra penalty for page breaking after a hyphenated line</li>
+<li>\predisplaypenalty=10000 # penalty for breaking before a display</li>
+<li>\postdisplaypenalty=0 # penalty for breaking after a display</li>
+<li>\floatingpenalty = 20000 # penalty for splitting an insertion (can only be split footnote in standard LaTeX)</li>
+<li>\raggedbottom # or \flushbottom</li>
+<li>\usepackage{float} # keep figures where there are in the text</li>
+<li>\floatplacement{figure}{H} # keep figures where there are in the text</li>
+</ul>
+<hr>
+<h1 id="%D1%86%D0%B5%D0%BB%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B">Цель работы</h1>
+<p>Ознакомление с алгоритмами целочисленной арифметики многократной точности, а также их последующая программная реализация.</p>
+<h1 id="%D1%82%D0%B5%D0%BE%D1%80%D0%B5%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D1%81%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D1%8F">Теоретические сведения</h1>
+<p>Высокоточная (длинная) арифметика — это операции (базовые арифметические действия,
+элементарные математические функции и пр.) над числами большой разрядности
+(многоразрядными числами), т.е. числами, разрядность которых превышает
+длину машинного слова универсальных процессоров общего назначения (более 128 бит).</p>
+<p>В современных асимметричных криптосистемах в качестве ключей, как правило,
+используются целые числа длиной 1000 и более битов.
+Для задания чисел такого размера не подходит ни один стандартный целочисленный
+тип данных современных языков программирования. Представление чисел в формате
+с плавающей точкой позволяет задать очень большие числа
+(например, тип long double языка C++ -- до $10^{5000}$),
+но не удовлетворяет требованию абсолютной точности,
+характерному для криптографических приложений. Поэтому большие целые числа
+представляются в криптографических пакетах в виде последовательности цифр
+в некоторой системе счисления (обозначим основание системы счисления $b$): $x = (x_{n-1} x_{n-2} \ldots x_1 x_0)_b,
+$ где $\forall i \in [0, n - 1]: 0 \le x_i &lt; b$.</p>
+<p>Основание системы счисления $b$ выбирается так, чтобы существовали машинные команды
+для работы с однозначными и двузначными числами; как правило, $b$ равно $2^8$, $2^{16}$ или $2^{32}$.</p>
+<p>При работе с большими целыми числами знак такого числа удобно хранить
+в отдельной переменной. Например, при умножении двух чисел знак произведения вычисляется отдельно.</p>
+<p>Далее при описании алгоритмов квадратные скобки означают, что берётся целая часть числа.</p>
+<h2 id="%D1%81%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BD%D0%B5%D0%BE%D1%82%D1%80%D0%B8%D1%86%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D1%85-%D1%86%D0%B5%D0%BB%D1%8B%D1%85-%D1%87%D0%B8%D1%81%D0%B5%D0%BB">Сложение неотрицательных целых чисел</h2>
+<p>*Вход. Два неотрицательных числа $u = u_1 u_2 \ldots u_n$ и $v = v_1 v_2 \ldots v_n$; разрядность чисел $n$; основание системы счисления $b$.</p>
+<p>*Выход. Сумма $w = w_0 w_1 \ldots w_n$, где $w_0$ - цифра переноса, всегда равная $0$ либо $1$.</p>
+<ol>
+<li>Присвоить $j = n, k = 0$ (<em>$j$ идет по разрядам, $k$ следит за переносом</em>).</li>
+<li>Присвоить $w_j = (u_j + v_j + k) \pmod{b}$, где $k = \left[ \frac{u_j + v_j + k}{b} \right]$.</li>
+<li>Присвоить $j = j - 1$. Если $j &gt; 0$, то возвращаемся на шаг 2; если $j = 0$, то присвоить $w_0 = k$ и результат: $w$.</li>
+</ol>
+<h2 id="%D0%B2%D1%8B%D1%87%D0%B8%D1%82%D0%B0%D0%BD%D0%B8%D0%B5-%D0%BD%D0%B5%D0%BE%D1%82%D1%80%D0%B8%D1%86%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D1%85-%D1%86%D0%B5%D0%BB%D1%8B%D1%85-%D1%87%D0%B8%D1%81%D0%B5%D0%BB">Вычитание неотрицательных целых чисел</h2>
+<p>*Вход. Два неотрицательных числа $u = u_1 u_2 \ldots u_n$ и $v = v_1 v_2 \ldots v_n$, $u &gt; v$; разрядность чисел $n$; основание системы счисления $b$.</p>
+<p>*Выход. Разность $w = w_0 w_1 \ldots w_n = u - v$.</p>
+<ol>
+<li>Присвоить $j = n, k = 0$ ($k$ -- заём из старшего разряда).</li>
+<li>Присвоить $w_j = (u_j - v_j + k) \pmod{b}$; $k = \left[ \frac{u_j - v_j + k}{b} \right]$.</li>
+<li>Присвоить $j = j - 1$. Если $j &gt; 0$, то возвращаемся на шаг 2; если $j = 0$, то результат: $w$.</li>
+</ol>
+<h2 id="%D1%83%D0%BC%D0%BD%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BD%D0%B5%D0%BE%D1%82%D1%80%D0%B8%D1%86%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D1%85-%D1%86%D0%B5%D0%BB%D1%8B%D1%85-%D1%87%D0%B8%D1%81%D0%B5%D0%BB-%D1%81%D1%82%D0%BE%D0%BB%D0%B1%D0%B8%D0%BA%D0%BE%D0%BC">Умножение неотрицательных целых чисел столбиком</h2>
+<p>*Вход. Числа $u = u_1 u_2 \ldots u_n$, $v = v_1 v_2 \ldots v_m$; основание системы счисления $b$.</p>
+<p>*Выход. Произведение $w = uv = w_1 w_2 \ldots w_{m+n}$.</p>
+<ol>
+<li>Выполнить присвоения: $w_{m+1} = 0, w_{m+2} = 0, \ldots, w_{m+n} = 0, j = m$ (<em>$j$ перемещается по номерам разрядов числа $v$ от младших к старшим</em>).</li>
+<li>Если $v_j = 0$, то присвоить $w_j = 0$ и перейти на шаг 6.</li>
+<li>Присвоить $i = n, k = 0$ (<em>значение $i$ идет по номерам разрядов числа $u$, $k$ отвечает за перенос</em>).</li>
+<li>Присвоить $t = u_i \cdot v_j + w_{i+j} + k, w_{i+j} = t \pmod{b}, k = \left[ \frac{t}{b} \right]$.</li>
+<li>Присвоить $i = i - 1$. Если $i &gt; 0$, то возвращаемся на шаг 4, иначе присвоить $w_j = k$.</li>
+<li>Присвоить $j = j - 1$. Если $j &gt; 0$, то вернуться на шаг 2. Если $j = 0$, то результат: $w$.</li>
+</ol>
+<h2 id="%D0%B1%D1%8B%D1%81%D1%82%D1%80%D1%8B%D0%B9-%D1%81%D1%82%D0%BE%D0%BB%D0%B1%D0%B8%D0%BA">Быстрый столбик</h2>
+<p>*Вход. Числа $u = u_1 u_2 \ldots u_n$, $v = v_1 v_2 \ldots v_m$; основание системы счисления $b$.</p>
+<p>*Выход. Произведение $w = uv = w_1 w_2 \ldots w_{m+n}$.</p>
+<ol>
+<li>Присвоить $t = 0$.</li>
+<li>Для $s$ от $0$ до $m + n - 1$ с шагом 1 выполнить шаги 3 и 4.</li>
+<li>Для $i$ от $0$ до $s$ с шагом 1 выполнить присвоение $t~=~t~+~u_{n - i}~\cdot~v_{m - s + i}$.</li>
+<li>Присвоить $w_{m + n - s} = t \pmod{b}, t = \left[ \frac{t}{b} \right]$. Результат: $w$.</li>
+</ol>
+<h2 id="%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE%D1%80%D0%B0%D0%B7%D1%80%D1%8F%D0%B4%D0%BD%D1%8B%D1%85-%D1%86%D0%B5%D0%BB%D1%8B%D1%85-%D1%87%D0%B8%D1%81%D0%B5%D0%BB">Деление многоразрядных целых чисел</h2>
+<p>*Вход. Числа $u = u_n \ldots u_1 u_0$, $v = v_t \ldots v_1 v_0, n \ge t \ge 1, v_t \ne 0$.</p>
+<p>*Выход. Частное $q = q_{n-t} \ldots q_0$, остаток $r = r_t \ldots r_0$.</p>
+<ol>
+<li>Для $j$ от $0$ до $n - t$ присвоить $q_j = 0$.</li>
+<li>Пока $u \ge v b^{n - t}$, выполнять: $q_{n - t} = q_{n - t} + 1, u = u - v b^{n - t}$.</li>
+<li>Для $i = n, n - 1, \ldots, t + 1$ выполнять пункты 3.1 -- 3.4:
+3.1. если $u_i \ge v_t$, то присвоить $q_{i - t - 1} = b - 1$, иначе присвоить $q_{i - t - 1} = \frac{u_i b + u_{i - 1}}{v_t}$.
+3.2. пока $q_{i - t - 1} (v_t b + v_{t - 1}) &gt; u_i b^2 + u_{i - 1} b + u_{i - 2}$ выполнять $q_{i - t - 1} = q_{i - t - 1} - 1$.
+3.3. присвоить $u = u - q_{i - t - 1} b^{i - t - 1} v$.
+3.4. если $u &lt; 0$, то присвоить $u = u + v b^{i - t - 1}$, $q_{i - t - 1}~=~q_{i - t - 1}~-~1$.</li>
+<li>$r = u$. Результат: $q$ и $r$.</li>
+</ol>
+<h1 id="%D0%B2%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B">Выполнение работы</h1>
+<h2 id="%D1%80%D0%B5%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D0%B0-%D0%BD%D0%B0-%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5-python">Реализация алгоритма на языке Python</h2>
+<pre class="hljs"><code><div>import math
+# надо ввести данные сначала
+u = &quot;12345&quot;
+v = &quot;56789&quot;
+b = 10
+n = 5
+# алгоритм 1
+j = n
+k = 0
+
+w = list()
+for i in range(1, n+1):
+    w.append(
+        (int(u[n-i]) + int(v[n-i]) + k) % b
+    )
+
+    k = (int(u[n-i]) + int(v[n-i]) + k)//b
+    j = j - 1
+w.reverse()
+print(w)
+
+# алгоритм 2
+u = &quot;56789&quot;
+v = &quot;12345&quot;
+
+j = n
+k = 0
+w = list()
+for i in range(1, n+1):
+    w.append(
+        (int(u[n-i]) - int(v[n-i]) + k) % b
+    )
+
+    k = (int(u[n-i]) - int(v[n-i]) + k)//b
+    j = j - 1
+w.reverse()
+print(w)
+
+# алгоритм 3
+u = &quot;123456&quot;
+v = &quot;7890&quot;
+n = 6
+m = 4
+
+w = list()
+for i in range(m+n):
+    w.append(0)
+j = m
+
+
+def step6():
+    global j
+    global w
+    j = j - 1
+    if j &gt; 0:
+        step2()
+    if j == 0:
+        print(w)
+
+
+def step2():
+    global v
+    global w
+    global j
+    if j == m:
+        j = j-1
+    if int(v[j]) == 0:
+        w[j] = 0
+        step6()
+
+
+def step4():
+    global k
+    global t
+    global i
+    if i == n:
+        i = i - 1
+    t = int(u[i]) * int(v[j]) + w[i + j] + k
+    w[i + j] = t % b
+    k = t / b
+
+
+def step5():
+    global i
+    global w
+    global j
+    global k
+    i = i - 1
+    if i &gt; 0:
+        step4()
+    else:
+        w[j] = k
+
+
+step2()
+i = n
+k = 0
+t = 1
+step4()
+step5()
+step6()
+print(w)
+
+
+# алгоритм 4
+u4 = &quot;12345&quot;
+n = 5
+v4 = &quot;6789&quot;
+m = 4
+b = 10
+w1 = list()
+for i in range(m+n+2):
+    w1.append(0)
+t1 = 0
+for s1 in range(0, m+n):
+    for i1 in range(0, s1+1):
+        if n-i1&gt;n or m-s1+i1&gt;m or n-i1&lt;0 or m-s1+i1&lt;0 or m-s1+i1-1&lt;0:
+            continue
+        t1 = t1 + (int(u[n-i1-1]) * int(v[m-s1+i1-1]))
+    w1[m+n-s1-1] = t1 % b
+    t1 = math.floor(t1/b)
+print(w1)
+
+
+# алгоритм 5
+u = &quot;12346789&quot;
+n = 7
+v = &quot;56789&quot;
+t = 4
+b = 10
+q = list()
+for j in range(n-t):
+    q.append(0)
+r = list()
+for j in range(t):
+    r.append(0)
+
+while int(u) &gt;= int(v)*(b**(n-t)):
+    q[n-t] = q[n-t] + 1
+    u = int(u) - int(v)*(b**(n-t))
+u = str(u)
+for i in range(n, t+1, -1):
+    v = str(v)
+    u = str(u)
+    if int(u[i]) &gt; int(v[t]):
+        q[i-t-1] = b - 1
+    else:
+        q[i-t-1] = math.floor((int(u[i])*b + int(u[i-1]))/int(v[t]))
+
+    while (int(q[i-t-1])*(int(v[t])*b + int(v[t-1])) &gt; int(u[i])*(b**2) + int(u[i-1])*b + int(u[i-2])):
+        q[i-t-1] = q[i-t-1] - 1
+    u = (int(u) - q[i-t-1]*b**(i-t-1)*int(v))
+    if u &lt; 0:
+        u = int(u) + int(v) *(b**(i-t-1))
+        q[i-t-1] = q[i-t-1] - 1
+r = u
+print(q, r)
+</div></code></pre>
+<h2 id="%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9-%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80">Контрольный пример</h2>
+<p><img src="image/0.png" alt="Работа алгоритма">{ #fig:001 }</p>
+<h1 id="%D0%B2%D1%8B%D0%B2%D0%BE%D0%B4%D1%8B">Выводы</h1>
+<p>Изучили задачу представления больших чисел, познакомились с вычислительными алгоритмами.</p>
+<h1 id="%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA-%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%82%D1%83%D1%80%D1%8Bunnumbered">Список литературы{.unnumbered}</h1>
+<ol>
+<li><a href="https://habr.com/ru/post/207754/">Длинная арифметика от Microsoft</a></li>
+<li><a href="https://programforyou.ru/poleznoe/dlinnaya-arifmetika-kak-operirovat-chislami-ne-pomeshchayushchimisya-ni-v-odin-iz-chislovyh-tipov">Как оперировать числами, не помещающимися ни в один из числовых типов</a></li>
+</ol>
+
+</body>
+</html>
